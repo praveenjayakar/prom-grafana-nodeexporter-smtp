@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ce-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    path: /dosb_files/jwfm86/ce
+    server: 170.187.252.153
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: dxp-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    path: /dosb_files/jwfm86/dxp
+    server: 170.187.252.153
+

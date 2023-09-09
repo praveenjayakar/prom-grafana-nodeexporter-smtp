@@ -1,0 +1,30 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-ce
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-ce
+  template:
+    metadata:
+      labels:
+        app: nginx-ce
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        volumeMounts:
+        - name: ce-storage
+          mountPath: /usr/share/nginx/html
+          subPath: nginx.html
+
+      volumes:
+      - name: ce-storage
+        persistentVolumeClaim:
+          claimName: ce-pvc
+
+---

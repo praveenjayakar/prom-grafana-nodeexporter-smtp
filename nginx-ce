@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-ce
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-ce
+  template:
+    metadata:
+      labels:
+        app: nginx-ce
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-html
+          mountPath: /usr/share/nginx/html/
+        - name: deploy
+          mountPath: /home/
+      volumes:
+      - name: nginx-html
+        persistentVolumeClaim:
+          claimName: ce-pvc
+      - name: deploy
+        persistentVolumeClaim:
+          claimName: dxp-pvc
+
